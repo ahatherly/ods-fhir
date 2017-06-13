@@ -29,7 +29,7 @@ import uk.nhs.fhir.ods.resourceproviders.RestfulOrganisationResourceProvider;
  * 
  * 
  */
-@WebServlet(urlPatterns= {"/*"}, displayName="ODS FHIR Server", loadOnStartup = 1)
+@WebServlet(urlPatterns= {"/ods/*"}, displayName="ODS FHIR Server", loadOnStartup = 1)
 public class FHIREndpoint extends RestfulServer {
 
 	private static final Logger log = Logger.getLogger(FHIREndpoint.class.getName());

@@ -29,6 +29,13 @@ Now you can install the FHIR server endpoint. Go to the root of this project dir
 mvn install
 ```
 
+Our container will need somewhere for it's temp files (Jetty needs a writable temp directory but we want our container to be immutable), so lets create one using the default path. Also, assuming you are not using user namespacing in Docker, you'll need to give the relevant user in the container access to write to that folder:
+
+```
+mkdir /docker-data/ods-fhir-temp
+chown -R 1000 /docker-data/ods-fhir-temp
+```
+
 Now, create and deploy the container:
 
 ```
@@ -49,9 +56,9 @@ dc0791d68ef2        ods-fhir            "/docker-entrypoin..."   12 minutes ago 
 You should now be able to run FHIR calls against http://localhost:8085. For example, try:
 
 ```
-curl http://localhost:8085/Organization/X09
-curl http://localhost:8085/Organization/X09?_format=json
-curl http://localhost:8085/Organization?name:contains=CLECKHEATON
-curl http://localhost:8085/Organization?name:exact=ASHCROFT+NH+\(CLECKHEATON\)
+curl http://localhost:8085/ods/Organization/X09
+curl http://localhost:8085/ods/Organization/X09?_format=json
+curl http://localhost:8085/ods/Organization?name:contains=CLECKHEATON
+curl http://localhost:8085/ods/Organization?name:exact=ASHCROFT+NH+\(CLECKHEATON\)
 ```
 
